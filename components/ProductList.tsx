@@ -10,6 +10,7 @@ interface SearchParams {
   min?: string;
   max?: string;
   type?: string;
+  name?: string;
 }
 
 // Define the component's props
@@ -68,6 +69,14 @@ const ProductList = async ({
     });
   }
 
+  // Handle NAME search (from search bar)
+  if (searchParams?.name) {
+    const term = searchParams.name.toLowerCase();
+    productsToFilter = productsToFilter.filter((product) =>
+      product.name?.toLowerCase().includes(term)
+    );
+  }
+
   // ---  Sorting Logic ---
   let sortedProducts = [...productsToFilter]; // Always work on a new copy
 
@@ -92,7 +101,7 @@ const ProductList = async ({
     <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap">
       {finalProductList.length === 0 ? (
         <p className="text-gray-500 text-lg w-full text-center">
-          No products found matching your criteria.
+          No items found matching your search.
         </p>
       ) : (
         finalProductList.map((product: products.Product) => (
