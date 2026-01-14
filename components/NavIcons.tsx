@@ -7,11 +7,12 @@ import ProfileIcon from "./ProfileIcon";
 
 const NavIcons = async () => {
   const user = await auth();
+  const cartHref = user?.user ? "/cart" : "/signin?callbackUrl=/cart";
   return (
     <div className="flex items-center gap-4 xl:gap-6 relative">
       {user?.user ? <ProfileIcon /> : <Link href={"/signin"}>Login</Link>}
       <NotificationIcon />
-      <Link href={"/cart"}>
+      <Link href={cartHref}>
         <CartIcon />
       </Link>
       <DashboardIcon />

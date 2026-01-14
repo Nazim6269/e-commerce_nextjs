@@ -1,12 +1,19 @@
 import CartList from "@/components/CartList";
 import OrderSummary from "@/components/OrderSummary";
 import { wixClientServer } from "@/lib/wixClientServer";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 
 // Force dynamic rendering because wix client reads cookies for auth
 export const dynamic = "force-dynamic";
 
 const CartPage = async () => {
+  const session = await auth();
+  if (!session?.user) {
+    redirect("/signin?callbackUrl=/cart");
+  }
+
   const wixClient = await wixClientServer();
 
   const res = await wixClient.products
