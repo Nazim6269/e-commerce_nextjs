@@ -4,10 +4,10 @@ import { signIn } from "next-auth/react";
 
 const loading = false;
 
-const SocialLogin = () => {
+const SocialLogin = ({ callbackUrl }: { callbackUrl?: string }) => {
   const handleClick = async (providers: string) => {
     await signIn(providers, {
-      callbackUrl: "http://localhost:3000/cart",
+      callbackUrl: callbackUrl || "/",
     });
   };
   return (

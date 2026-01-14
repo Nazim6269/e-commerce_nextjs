@@ -1,6 +1,8 @@
 "use client";
 
 import { cartStorage } from "@/services/localStorage";
+import { getSession } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export interface CartItemMinimal {
@@ -18,6 +20,8 @@ const Add = ({
   stockNumber: number;
 }) => {
   const [quantity, setQuantity] = useState(1);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleQuantity = (type: "i" | "d") => {
     if (type === "d" && quantity > 1) {
@@ -28,7 +32,15 @@ const Add = ({
     }
   };
 
-  const handleAddToCart = (id: string) => {
+  const handleAddToCart = async (id: string) => {
+    // Only logged-in users can add to cart
+    const session = await getSession();
+    if (!session?.user) {
+      const callbackUrl = encodeURIComponent(pathname || "/");
+      router.push(`/signin?callbackUrl=${callbackUrl}`);
+      return;
+    }
+
     const items: CartItemMinimal[] = cartStorage.getProduct() || [];
 
     let itemExists = false;
