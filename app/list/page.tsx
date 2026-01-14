@@ -3,6 +3,9 @@ import ProductList from "@/components/ProductList";
 import { wixClientServer } from "@/lib/wixClientServer";
 import Image from "next/image";
 
+// Wix client depends on cookies, so keep this route dynamic
+export const dynamic = "force-dynamic";
+
 const ListPage = async ({ searchParams }: { searchParams: any }) => {
   const wixClient = await wixClientServer();
 

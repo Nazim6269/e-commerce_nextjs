@@ -5,6 +5,9 @@ import Slider from "@/components/Slider";
 import { wixFeaturedCategoryId } from "@/secret";
 import { Suspense } from "react";
 
+// Mark this page as dynamic because underlying wix client reads cookies
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   return (
     <>
