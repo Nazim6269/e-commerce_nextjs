@@ -24,6 +24,8 @@ const CheckoutSection = ({ items }: { items: products.Product[] }) => {
   const [guestEmail, setGuestEmail] = useState("");
   const [guestName, setGuestName] = useState("");
   const [agree, setAgree] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const stored = cartStorage.getProduct() || [];
@@ -98,11 +100,56 @@ const CheckoutSection = ({ items }: { items: products.Product[] }) => {
     }
   };
 
-  const handlePlaceOrder = () => {
-    if (!agree) return;
-    // Here you would integrate payment / order creation
-    // For now we just show a basic confirmation
-    alert("Order placed! (demo)");
+  const handlePlaceOrder = async () => {
+    if (!agree || loading) return;
+    if (!guestEmail || !guestName) {
+      setError("Please enter your name and email.");
+      return;
+    }
+
+    setError("");
+    setLoading(true);
+    try {
+      const shippingOption = shippingOptions.find((o) => o.id === shippingId);
+
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          lines,
+          shippingAmount: shipping,
+          taxAmount: tax,
+          shippingLabel: shippingOption?.label,
+          guest: {
+            name: guestName,
+            email: guestEmail,
+          },
+          coupon: appliedCoupon
+            ? {
+                code: appliedCoupon,
+                amount: discount,
+              }
+            : null,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Failed to start checkout");
+      }
+
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error("Missing checkout URL");
+      }
+    } catch (err: any) {
+      setError(err.message || "Something went wrong starting payment.");
+      setLoading(false);
+    }
   };
 
   if (lines.length === 0) {
@@ -207,6 +254,12 @@ const CheckoutSection = ({ items }: { items: products.Product[] }) => {
         discount={discount}
       />
 
+      {error && (
+        <p className="text-sm text-red-500">
+          {error}
+        </p>
+      )}
+
       {/* Terms + actions */}
       <div className="flex items-start sm:items-center">
         <input
@@ -240,11 +293,11 @@ const CheckoutSection = ({ items }: { items: products.Product[] }) => {
 
         <button
           type="button"
-          disabled={!agree}
+          disabled={!agree || loading}
           onClick={handlePlaceOrder}
           className="mt-4 flex w-full items-center justify-center rounded-lg bg-black px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 disabled:opacity-60 sm:mt-0"
         >
-          Review &amp; pay
+          {loading ? "Redirecting to payment..." : "Review & pay"}
         </button>
       </div>
     </div>
