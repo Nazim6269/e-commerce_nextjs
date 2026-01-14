@@ -5,10 +5,16 @@ import { useEffect, useMemo, useState } from "react";
 import { cartStorage } from "@/services/localStorage";
 import type { CartItemMinimal } from "./Add";
 
-const CartIcon = () => {
+const CartIcon = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const [cart, setCart] = useState<CartItemMinimal[]>([]);
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      // If user is not logged in, ignore any localStorage cart
+      setCart([]);
+      return;
+    }
+
     const sync = () => setCart(cartStorage.getProduct() || []);
     sync();
 
@@ -19,10 +25,13 @@ const CartIcon = () => {
       window.removeEventListener("cart_updated", sync);
       window.removeEventListener("storage", sync);
     };
-  }, []);
+  }, [isLoggedIn]);
 
   // Show number of different items (distinct products) in cart, not total quantity
-  const itemCount = useMemo(() => cart.length, [cart]);
+  const itemCount = useMemo(
+    () => (isLoggedIn ? cart.length : 0),
+    [cart.length, isLoggedIn]
+  );
 
   return (
     <>

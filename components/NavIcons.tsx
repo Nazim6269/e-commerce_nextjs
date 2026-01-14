@@ -13,7 +13,7 @@ const NavIcons = async () => {
       {user?.user ? <ProfileIcon /> : <Link href={"/signin"}>Login</Link>}
       <NotificationIcon />
       <Link href={cartHref}>
-        <CartIcon />
+        <CartIcon isLoggedIn={!!user?.user} />
       </Link>
       <DashboardIcon />
     </div>
