@@ -21,10 +21,8 @@ const CartIcon = () => {
     };
   }, []);
 
-  const itemCount = useMemo(
-    () => cart.reduce((sum, item) => sum + (Number(item.qty) || 0), 0),
-    [cart]
-  );
+  // Show number of different items (distinct products) in cart, not total quantity
+  const itemCount = useMemo(() => cart.length, [cart]);
 
   return (
     <>
