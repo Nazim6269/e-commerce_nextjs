@@ -25,9 +25,7 @@ const Navbar = () => {
             <Image src="/logo.png" alt="" width={24} height={24} />
             <div className="text-2xl tracking-wide">Buyly</div>
           </Link>
-          <div className="hidden xl:flex gap-4">
-            <Link href="/">Shop</Link>
-          </div>
+          
         </div>
         {/* RIGHT */}
         <div className="w-2/3 xl:w-1/2 flex items-center justify-between gap-8">
