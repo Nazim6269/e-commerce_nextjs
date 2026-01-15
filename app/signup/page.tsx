@@ -388,7 +388,7 @@ const SignUpPage: React.FC<{}> = () => {
               type="button"
               onClick={handleSubmit(onSubmit, onError)}
               disabled={isPending}
-              className="w-full rounded-lg bg-pink-600 py-2.5 font-semibold text-white transition-all hover:bg-pink-700 disabled:cursor-not-allowed disabled:opacity-60 mt-6"
+              className="w-full rounded-lg bg-nazim py-2.5 font-semibold text-white transition-all disabled:cursor-not-allowed disabled:opacity-60 mt-6"
             >
               {isPending ? (
                 <span className="flex items-center justify-center gap-2">
@@ -424,7 +424,7 @@ const SignUpPage: React.FC<{}> = () => {
             Already have an account?{" "}
             <Link
               href="/signin"
-              className="font-medium text-pink-600 hover:text-pink-700"
+              className="font-medium text-nazim"
             >
               Login here
             </Link>
