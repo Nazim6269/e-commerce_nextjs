@@ -61,7 +61,7 @@ export const loginAction = async (
 
 //sign out action
 export const doSignOut = async () => {
-  // Always send user back to home page after signing out
+  console.log("sign out action")
   await signOut({
     redirectTo: "/",
   });

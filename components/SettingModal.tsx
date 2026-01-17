@@ -8,7 +8,7 @@ const SettingModal = ({ onClick }: { onClick: () => void }) => {
         Profile
       </Link>
       <form action={doSignOut}>
-        <button className=" py-2 rounded-md" onClick={onClick}>
+        <button className=" py-2 rounded-md" >
           Sign out
         </button>
       </form>
