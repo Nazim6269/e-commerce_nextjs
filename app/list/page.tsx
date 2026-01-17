@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import Skeleton from "@/components/Skeleton";
 import Filter from "@/components/Filter";
 import ProductList from "@/components/ProductList";
 import { wixClientServer } from "@/lib/wixClientServer";
@@ -6,11 +8,12 @@ import Image from "next/image";
 // Wix client depends on cookies, so keep this route dynamic
 export const dynamic = "force-dynamic";
 
-const ListPage = async ({ searchParams }: { searchParams: any }) => {
+const ListPage = async ({ searchParams }: { searchParams: Promise<any> }) => {
+  const resolvedSearchParams = await searchParams;
   const wixClient = await wixClientServer();
 
   const res = await wixClient.collections.getCollectionBySlug(
-    searchParams.cat || "all-products"
+    resolvedSearchParams.cat || "all-products"
   );
 
   return (
@@ -34,12 +37,14 @@ const ListPage = async ({ searchParams }: { searchParams: any }) => {
       <Filter />
       {/* PRODUCTS */}
       <h1 className="mt-12 text-xl font-semibold">Shoes For You!</h1>
-      <ProductList
-        categoryId={
-          res.collection?._id || "00000000-000000-000000-000000000001"
-        }
-        searchParams={searchParams}
-      />
+      <Suspense fallback={<Skeleton />}>
+        <ProductList
+          categoryId={
+            res.collection?._id || "00000000-000000-000000-000000000001"
+          }
+          searchParams={resolvedSearchParams}
+        />
+      </Suspense>
     </div>
   );
 };

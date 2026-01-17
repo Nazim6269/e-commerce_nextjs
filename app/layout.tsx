@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: "Choose your best one",
 };
 
+import NextTopLoader from 'nextjs-toploader';
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -19,6 +21,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <NextTopLoader color="#F35C7A" showSpinner={false} />
         <Navbar />
         {children}
         <Footer />

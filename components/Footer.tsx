@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="text-2xl tracking-wide">Buyly</div>
           </Link>
           <p>
-            4201 Al-falah Goli, sholo-shohor, 2 not gate, Chittagong, Bangladesh
+            North Badda, Tatul Tola Road, Dhaka - 1212, Bangladesh
           </p>
           <span className="font-semibold">nazimdev100220001@gmail.com</span>
           <span className="font-semibold">+880 1518-373269</span>
@@ -84,7 +84,7 @@ const Footer = () => {
       </div>
       {/* BOTTOM */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-8 mt-16">
-        <div className="">© 2024 All rights reserved by Nazim </div>
+        <div className="">© {new Date().getFullYear()} All rights reserved by Nazim </div>
         <div className="flex flex-col gap-8 md:flex-row">
           <div className="">
             <span className="text-gray-500 mr-4">Language</span>
