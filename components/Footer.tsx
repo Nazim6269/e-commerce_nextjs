@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Github, Linkedin, Globe } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -17,11 +18,15 @@ const Footer = () => {
           <span className="font-semibold">nazimdev100220001@gmail.com</span>
           <span className="font-semibold">+880 1518-373269</span>
           <div className="flex gap-6">
-            <Image src="/facebook.png" alt="" width={16} height={16} />
-            <Image src="/instagram.png" alt="" width={16} height={16} />
-            <Image src="/youtube.png" alt="" width={16} height={16} />
-            <Image src="/pinterest.png" alt="" width={16} height={16} />
-            <Image src="/x.png" alt="" width={16} height={16} />
+            <Link href="https://portfolio-nextjs-one-tau.vercel.app/" target="_blank" className="hover:text-nazim transition-colors">
+              <Globe size={20} />
+            </Link>
+            <Link href="https://www.linkedin.com/in/nazim-uddin-23a93a216/" target="_blank" className="hover:text-nazim transition-colors">
+              <Linkedin size={20} />
+            </Link>
+            <Link href="https://github.com/Nazim6269" target="_blank" className="hover:text-nazim transition-colors">
+              <Github size={20} />
+            </Link>
           </div>
         </div>
         {/* CENTER */}
@@ -29,31 +34,31 @@ const Footer = () => {
           <div className="flex flex-col justify-between">
             <h1 className="font-medium text-lg">COMPANY</h1>
             <div className="flex flex-col gap-6">
-              <Link href="">About Us</Link>
-              <Link href="">Careers</Link>
-              <Link href="">Affiliates</Link>
-              <Link href="">Blog</Link>
-              <Link href="">Contact Us</Link>
+              <Link href="/" className="hover:text-nazim transition-colors">About Us</Link>
+              <Link href="/" className="hover:text-nazim transition-colors">Careers</Link>
+              <Link href="/" className="hover:text-nazim transition-colors">Affiliates</Link>
+              <Link href="/" className="hover:text-nazim transition-colors">Blog</Link>
+              <Link href="/" className="hover:text-nazim transition-colors">Contact Us</Link>
             </div>
           </div>
           <div className="flex flex-col justify-between">
             <h1 className="font-medium text-lg">SHOP</h1>
             <div className="flex flex-col gap-6">
-              <Link href="">New Arrivals</Link>
-              <Link href="">Accessories</Link>
-              <Link href="">Men</Link>
-              <Link href="">Women</Link>
-              <Link href="">All Products</Link>
+              <Link href="/list?cat=new-arrival" className="hover:text-nazim transition-colors">New Arrivals</Link>
+              <Link href="/list?cat=accessories" className="hover:text-nazim transition-colors">Accessories</Link>
+              <Link href="/list?cat=men" className="hover:text-nazim transition-colors">Men</Link>
+              <Link href="/list?cat=women" className="hover:text-nazim transition-colors">Women</Link>
+              <Link href="/list" className="hover:text-nazim transition-colors">All Products</Link>
             </div>
           </div>
           <div className="flex flex-col justify-between">
             <h1 className="font-medium text-lg">HELP</h1>
             <div className="flex flex-col gap-6">
-              <Link href="">Customer Service</Link>
-              <Link href="">My Account</Link>
-              <Link href="">Find a Store</Link>
-              <Link href="">Legal & Privacy</Link>
-              <Link href="">Gift Card</Link>
+              <Link href="/" className="hover:text-nazim transition-colors">Customer Service</Link>
+              <Link href="/profile" className="hover:text-nazim transition-colors">My Account</Link>
+              <Link href="/" className="hover:text-nazim transition-colors">Find a Store</Link>
+              <Link href="/" className="hover:text-nazim transition-colors">Legal & Privacy</Link>
+              <Link href="/" className="hover:text-nazim transition-colors">Gift Card</Link>
             </div>
           </div>
         </div>
