@@ -33,7 +33,7 @@ const NavIcons = async () => {
       <Link href={cartHref}>
         <CartIcon isLoggedIn={!!user?.user} />
       </Link>
-      <DashboardIcon />
+      {user?.user && <DashboardIcon />}
     </div>
   );
 };

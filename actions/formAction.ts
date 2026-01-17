@@ -4,6 +4,7 @@ import { SignInStateProps } from "@/app/signin/page";
 import { SignUpStateProps } from "@/app/signup/page";
 import { signIn, signOut } from "@/auth";
 import { registerToDB } from "@/lib/dbQuery";
+import { revalidatePath } from "next/cache";
 export interface User {
   name: string;
   email: string;
@@ -53,6 +54,7 @@ export const loginAction = async (
   if (!res) {
     return { success: false, message: "Failed to loign" };
   } else {
+    revalidatePath("/");
     return { success: true, message: "Successfully login!!!" };
   }
 };

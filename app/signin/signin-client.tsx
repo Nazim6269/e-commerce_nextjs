@@ -80,6 +80,7 @@ export default function SignInClient() {
     if (state.success) {
       setTimeout(() => {
         router.push(callbackUrl);
+        router.refresh();
       }, 1000);
     }
   }, [state.success, router, callbackUrl]);
@@ -147,8 +148,8 @@ export default function SignInClient() {
                 type="email"
                 {...register("email")}
                 className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.email
-                    ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                    : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
+                  ? "border-red-500 focus:border-red-500 focus:ring-red-100"
+                  : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
                   }`}
                 placeholder="you@example.com"
                 disabled={isPending}
@@ -180,8 +181,8 @@ export default function SignInClient() {
                 type="password"
                 {...register("password")}
                 className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.password
-                    ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                    : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
+                  ? "border-red-500 focus:border-red-500 focus:ring-red-100"
+                  : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
                   }`}
                 placeholder="Enter a strong password"
                 disabled={isPending}
