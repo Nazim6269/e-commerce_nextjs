@@ -7,7 +7,7 @@ export const googleSecret = process.env.GOOGLE_CLIENT_SECRET;
 
 // Support standard secret names used by Auth.js / NextAuth
 export const nextAuthSecret =
-  process.env.AUTH_SECRET || process.env.NEXT_AUTH_SECRET;
+  process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET;
 
 export const mongoUri = process.env.MONGODB_URI;
 export const githubId = process.env.GITHUB_ID;

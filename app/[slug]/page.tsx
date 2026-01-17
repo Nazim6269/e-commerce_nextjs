@@ -1,4 +1,7 @@
+
+import { checkIsInWishlist } from "@/actions/wishlist";
 import Add from "@/components/Add";
+import WishlistButton from "@/components/WishlistButton";
 import CustomizeProducts from "@/components/CustomizeProducts";
 import ProductImages from "@/components/ProductImages";
 import { wixClientServer } from "@/lib/wixClientServer";
@@ -43,6 +46,10 @@ export default async function SingleItemPage({ params }: PageProps) {
             </h2>
           </div>
         )}
+
+        <div className="flex items-center gap-4">
+          {product?._id && <WishlistButton productId={product._id} slug={product.slug || ""} initialIsInWishlist={await checkIsInWishlist(product._id)} />}
+        </div>
 
         <div className="h-[2px] bg-gray-100" />
         {product?._id && product?.variants && product?.productOptions ? (
