@@ -1,4 +1,4 @@
-
+import { notFound } from "next/navigation";
 import { checkIsInWishlist } from "@/actions/wishlist";
 import Add from "@/components/Add";
 import WishlistButton from "@/components/WishlistButton";
@@ -22,6 +22,10 @@ export default async function SingleItemPage({ params }: PageProps) {
     .find();
 
   const product = products.items[0];
+
+  if (!product) {
+    return notFound();
+  }
 
   return (
     <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative flex flex-col lg:flex-row gap-16">

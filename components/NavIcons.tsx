@@ -11,7 +11,7 @@ const NavIcons = async () => {
   return (
     <div className="flex items-center gap-4 xl:gap-6 relative">
       {user?.user ? <ProfileIcon /> : <Link href={"/signin"}>Login</Link>}
-      <NotificationIcon />
+      {user?.user && <NotificationIcon />}
       <Link href={"/wishlist"}>
         <div className="relative">
           <svg
@@ -29,7 +29,7 @@ const NavIcons = async () => {
         </div>
       </Link>
       <Link href={cartHref}>
-        <CartIcon isLoggedIn={!!user?.user} />
+        {user?.user && <CartIcon isLoggedIn={!!user?.user} />}
       </Link>
       {user?.user && <DashboardIcon />}
     </div>
