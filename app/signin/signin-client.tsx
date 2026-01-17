@@ -4,7 +4,7 @@ import { loginAction } from "@/actions/formAction";
 import SocialLogin from "@/components/SocialLogin";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, startTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -88,7 +88,9 @@ export default function SignInClient() {
     const fd = new FormData();
     fd.append("email", data.email);
     fd.append("password", data.password);
-    formAction(fd);
+    startTransition(() => {
+      formAction(fd);
+    });
   };
 
   const onError = () => {
@@ -128,7 +130,7 @@ export default function SignInClient() {
           },
         }}
       />
-      
+
       <section className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
         <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
           <h2 className="mb-6 text-center text-3xl font-bold text-gray-800">
@@ -144,11 +146,10 @@ export default function SignInClient() {
               <input
                 type="email"
                 {...register("email")}
-                className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${
-                  errors.email
+                className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.email
                     ? "border-red-500 focus:border-red-500 focus:ring-red-100"
                     : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
-                }`}
+                  }`}
                 placeholder="you@example.com"
                 disabled={isPending}
               />
@@ -178,11 +179,10 @@ export default function SignInClient() {
               <input
                 type="password"
                 {...register("password")}
-                className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${
-                  errors.password
+                className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.password
                     ? "border-red-500 focus:border-red-500 focus:ring-red-100"
                     : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
-                }`}
+                  }`}
                 placeholder="Enter a strong password"
                 disabled={isPending}
               />

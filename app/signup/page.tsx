@@ -3,7 +3,7 @@
 import { signUpAction } from "@/actions/formAction";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, startTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -120,7 +120,9 @@ const SignUpPage: React.FC<{}> = () => {
     fd.append("email", data.email);
     fd.append("password", data.password);
     fd.append("confirmPassword", data.confirmPassword);
-    formAction(fd);
+    startTransition(() => {
+      formAction(fd);
+    });
   };
 
   const onError = () => {
@@ -176,11 +178,10 @@ const SignUpPage: React.FC<{}> = () => {
               <input
                 type="text"
                 {...register("name")}
-                className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${
-                  errors.name
+                className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.name
                     ? "border-red-500 focus:border-red-500 focus:ring-red-100"
                     : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
-                }`}
+                  }`}
                 placeholder="Enter your name"
                 disabled={isPending}
               />
@@ -210,11 +211,10 @@ const SignUpPage: React.FC<{}> = () => {
               <input
                 type="email"
                 {...register("email")}
-                className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${
-                  errors.email
+                className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.email
                     ? "border-red-500 focus:border-red-500 focus:ring-red-100"
                     : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
-                }`}
+                  }`}
                 placeholder="you@example.com"
                 disabled={isPending}
               />
@@ -244,11 +244,10 @@ const SignUpPage: React.FC<{}> = () => {
               <input
                 type="password"
                 {...register("password")}
-                className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${
-                  errors.password
+                className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.password
                     ? "border-red-500 focus:border-red-500 focus:ring-red-100"
                     : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
-                }`}
+                  }`}
                 placeholder="Enter a strong password"
                 disabled={isPending}
               />
@@ -274,11 +273,10 @@ const SignUpPage: React.FC<{}> = () => {
                 <div className="mt-2 space-y-1">
                   <div className="flex items-center gap-1.5">
                     <svg
-                      className={`w-4 h-4 flex-shrink-0 ${
-                        passwordValue.length >= 6
+                      className={`w-4 h-4 flex-shrink-0 ${passwordValue.length >= 6
                           ? "text-green-500"
                           : "text-gray-400"
-                      }`}
+                        }`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -289,22 +287,20 @@ const SignUpPage: React.FC<{}> = () => {
                       />
                     </svg>
                     <p
-                      className={`text-xs ${
-                        passwordValue.length >= 6
+                      className={`text-xs ${passwordValue.length >= 6
                           ? "text-green-600"
                           : "text-gray-500"
-                      }`}
+                        }`}
                     >
                       At least 6 characters
                     </p>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <svg
-                      className={`w-4 h-4 flex-shrink-0 ${
-                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(passwordValue)
+                      className={`w-4 h-4 flex-shrink-0 ${/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(passwordValue)
                           ? "text-green-500"
                           : "text-gray-400"
-                      }`}
+                        }`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -315,11 +311,10 @@ const SignUpPage: React.FC<{}> = () => {
                       />
                     </svg>
                     <p
-                      className={`text-xs ${
-                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(passwordValue)
+                      className={`text-xs ${/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(passwordValue)
                           ? "text-green-600"
                           : "text-gray-500"
-                      }`}
+                        }`}
                     >
                       Contains uppercase, lowercase & number
                     </p>
@@ -336,11 +331,10 @@ const SignUpPage: React.FC<{}> = () => {
               <input
                 type="password"
                 {...register("confirmPassword")}
-                className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${
-                  errors.confirmPassword
+                className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.confirmPassword
                     ? "border-red-500 focus:border-red-500 focus:ring-red-100"
                     : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
-                }`}
+                  }`}
                 placeholder="Re-enter password"
                 disabled={isPending}
               />
