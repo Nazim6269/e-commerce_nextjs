@@ -20,29 +20,28 @@ const WishlistButton = ({
     const router = useRouter();
 
     const handleToggle = async (e: React.MouseEvent) => {
-        e.preventDefault(); // Prevent navigating if inside a Link
+        e.preventDefault();
 
-        // Optimistic update
         const previousState = isInWishlist;
         setIsInWishlist(!previousState);
 
         startTransition(async () => {
             try {
                 if (previousState) {
-                    // It was true, so we are removing
+
                     const res = await removeFromWishlist(productId);
                     if (!res.success) {
-                        setIsInWishlist(previousState); // Revert
+                        setIsInWishlist(previousState);
                         toast.error(res.message);
                     } else {
                         toast.success("Removed from wishlist");
                         router.refresh();
                     }
                 } else {
-                    // It was false, so we are adding
+
                     const res = await addToWishlist(productId, slug);
                     if (!res.success) {
-                        setIsInWishlist(previousState); // Revert
+                        setIsInWishlist(previousState);
                         toast.error(res.message);
                     } else {
                         toast.success("Added to wishlist");
