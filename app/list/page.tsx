@@ -11,10 +11,25 @@ export const dynamic = "force-dynamic";
 const ListPage = async ({ searchParams }: { searchParams: Promise<any> }) => {
   const resolvedSearchParams = await searchParams;
   const wixClient = await wixClientServer();
+  let collectionId = "00000000-000000-000000-000000000001";
+  let collectionName = "All Products";
 
-  const res = await wixClient.collections.getCollectionBySlug(
-    resolvedSearchParams.cat || "all-products"
-  );
+  try {
+    const res = await wixClient.collections.getCollectionBySlug(
+      resolvedSearchParams.cat || "all-products"
+    );
+    collectionId = res.collection?._id || collectionId;
+    collectionName = res.collection?.name || collectionName;
+  } catch (err) {
+    console.error("Collection error:", err);
+  }
+
+  // Fetch all categories for the filter component
+  const categoriesRes = await wixClient.collections.queryCollections().find();
+  const categories = categoriesRes.items.map(cat => ({
+    name: cat.name || "",
+    slug: cat.slug || ""
+  }));
 
   return (
     <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative">
@@ -34,14 +49,12 @@ const ListPage = async ({ searchParams }: { searchParams: Promise<any> }) => {
         </div>
       </div>
       {/* FILTER */}
-      <Filter />
+      <Filter categories={categories} />
       {/* PRODUCTS */}
-      <h1 className="mt-12 text-xl font-semibold">Shoes For You!</h1>
+      <h1 className="mt-12 text-xl font-semibold">{collectionName}</h1>
       <Suspense fallback={<Skeleton />}>
         <ProductList
-          categoryId={
-            res.collection?._id || "00000000-000000-000000-000000000001"
-          }
+          categoryId={collectionId}
           searchParams={resolvedSearchParams}
         />
       </Suspense>

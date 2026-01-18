@@ -81,15 +81,21 @@ const ProductList = async ({
   let sortedProducts = [...productsToFilter]; // Always work on a new copy
 
   if (searchParams?.sort) {
-    const isAscending = searchParams.sort === "asc-price";
-    const isDescending = searchParams.sort === "desc-price";
+    const [order, type] = searchParams.sort.split("-");
 
-    if (isAscending || isDescending) {
+    if (type === "price") {
       sortedProducts = sortedProducts.sort((a, b) => {
         const priceA = a.priceData?.price ?? 0;
         const priceB = b.priceData?.price ?? 0;
+        return order === "asc" ? priceA - priceB : priceB - priceA;
+      });
+    }
 
-        return isAscending ? priceA - priceB : priceB - priceA;
+    if (type === "lastUpdated") {
+      sortedProducts = sortedProducts.sort((a, b) => {
+        const dateA = new Date(a._createdDate || 0).getTime();
+        const dateB = new Date(b._createdDate || 0).getTime();
+        return order === "asc" ? dateA - dateB : dateB - dateA;
       });
     }
   }

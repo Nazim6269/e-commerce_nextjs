@@ -2,71 +2,53 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const Filter = () => {
+interface FilterProps {
+  categories: { name: string; slug: string }[];
+}
+
+const Filter = ({ categories }: FilterProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const params = new URLSearchParams(searchParams.toString());
 
-  //handle chnge function
   const handleFilterChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+    const params = new URLSearchParams(searchParams.toString());
 
-    //function that update url
-    const updateUrl = () => {
-      router.push(`${pathname}?${params.toString()}`);
-    };
-
-    //logics for sorting and filtering
-    switch (name) {
-      case "type":
-        if (value === "Type") {
-          params.delete("type"); // this is default value which is not actual filter or sort
-        } else {
-          params.set("type", value);
-        }
-        updateUrl();
-        break;
-
-      case "min":
-      case "max":
-        const priceValue = parseFloat(value);
-        if (isNaN(priceValue) || value.trim() === "") {
-          params.delete(name);
-        } else {
-          params.set(name, value);
-        }
-        updateUrl();
-        break;
-
-      case "cat":
-        if (value === "Category") {
-          params.delete("cat");
-        } else {
-          params.set("cat", value);
-        }
-        updateUrl();
-        break;
-
-      case "sort":
-        if (value === "Sort By") {
-          params.delete("sort");
-        } else {
-          if (value === "asc-price" || value === "desc-price") {
-            params.set("sort", value);
-          } else {
-            params.set("sort", value);
-          }
-        }
-        updateUrl();
-        break;
-
-      default:
-        console.warn(`Unhandled filter name: ${name}`);
-        break;
+    if (name === "type") {
+      if (value === "Type") {
+        params.delete("type");
+      } else {
+        params.set("type", value);
+      }
+    } else if (name === "min" || name === "max") {
+      const priceValue = parseFloat(value);
+      if (isNaN(priceValue) || value.trim() === "") {
+        params.delete(name);
+      } else {
+        params.set(name, value);
+      }
+    } else if (name === "cat") {
+      if (value === "Category") {
+        params.delete("cat");
+      } else {
+        params.set("cat", value);
+      }
+    } else if (name === "sort") {
+      if (value === "Sort By") {
+        params.delete("sort");
+      } else {
+        params.set("sort", value);
+      }
     }
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  const clearFilters = () => {
+    router.push(pathname);
   };
 
   return (
@@ -74,52 +56,57 @@ const Filter = () => {
       <div className="flex gap-6 flex-wrap">
         <select
           name="type"
-          id=""
-          className="py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED]"
+          className="py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED] outline-none"
           onChange={handleFilterChange}
+          value={searchParams.get("type") || "Type"}
         >
           <option>Type</option>
           <option value="physical">Physical</option>
           <option value="digital">Digital</option>
         </select>
         <input
-          type="text"
+          type="number"
           name="min"
           placeholder="min price"
-          className="text-xs rounded-2xl pl-2 w-24 ring-1 ring-gray-400"
+          className="text-xs rounded-2xl pl-2 w-24 ring-1 ring-gray-400 outline-none"
           onChange={handleFilterChange}
+          defaultValue={searchParams.get("min") || ""}
         />
         <input
-          type="text"
+          type="number"
           name="max"
           placeholder="max price"
-          className="text-xs rounded-2xl pl-2 w-24 ring-1 ring-gray-400"
+          className="text-xs rounded-2xl pl-2 w-24 ring-1 ring-gray-400 outline-none"
           onChange={handleFilterChange}
+          defaultValue={searchParams.get("max") || ""}
         />
 
         <select
           name="cat"
-          className="py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED]"
+          className="py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED] outline-none"
           onChange={handleFilterChange}
+          value={searchParams.get("cat") || "Category"}
         >
           <option>Category</option>
-          <option value="new-arrival">New Arrival</option>
-          <option value="popular">Popular</option>
+          {categories?.map((cat) => (
+            <option key={cat.slug} value={cat.slug}>
+              {cat.name}
+            </option>
+          ))}
         </select>
-        <select
-          name=""
-          id=""
-          className="py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED]"
+        <button
+          onClick={clearFilters}
+          className="py-2 px-4 rounded-2xl text-xs font-medium bg-nazim text-white hover:bg-pink-600 transition-all shadow-sm"
         >
-          <option>All Filters</option>
-        </select>
+          Clear Filters
+        </button>
       </div>
       <div className="">
         <select
           name="sort"
-          id=""
-          className="py-2 px-4 rounded-2xl text-xs font-medium bg-white ring-1 ring-gray-400"
+          className="py-2 px-4 rounded-2xl text-xs font-medium bg-white ring-1 ring-gray-400 outline-none"
           onChange={handleFilterChange}
+          value={searchParams.get("sort") || "Sort By"}
         >
           <option>Sort By</option>
           <option value="asc-price">Price (low to high)</option>
