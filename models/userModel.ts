@@ -4,6 +4,7 @@ interface IUser extends Document {
   email: string;
   password: string;
   name: string;
+  image?: string;
   confirmPassword?: string;
 }
 
@@ -18,6 +19,9 @@ const userSchema: Schema<IUser> = new Schema({
   },
   password: {
     required: true,
+    type: String,
+  },
+  image: {
     type: String,
   },
   confirmPassword: {

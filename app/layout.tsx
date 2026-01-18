@@ -13,6 +13,8 @@ export const metadata: Metadata = {
 
 import NextTopLoader from 'nextjs-toploader';
 
+import { Toaster } from "react-hot-toast";
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -24,6 +26,7 @@ export default async function RootLayout({
         <NextTopLoader color="#F35C7A" showSpinner={false} />
         <Navbar />
         {children}
+        <Toaster position="bottom-right" />
         <Footer />
       </body>
     </html>
