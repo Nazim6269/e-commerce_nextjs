@@ -5,9 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import WishlistButton from "@/components/WishlistButton";
 import DOMPurify from "isomorphic-dompurify";
+import { auth } from "@/auth";
 
 const WishlistPage = async () => {
     const wishlistItems = await getWishlist();
+    const session = await auth();
 
     if (!wishlistItems || wishlistItems.length === 0) {
         return (
@@ -70,7 +72,7 @@ const WishlistPage = async () => {
                             {/* Force button to prevent navigation when clicking interaction */}
                             {/* Force button to prevent navigation when clicking interaction */}
                             <div>
-                                {product._id && <WishlistButton productId={product._id} slug={product.slug || ""} initialIsInWishlist={true} />}
+                                {product._id && <WishlistButton productId={product._id} slug={product.slug || ""} userId={session?.user?.id} initialIsInWishlist={true} />}
                             </div>
                         </div>
 

@@ -5,6 +5,7 @@ import WishlistButton from "@/components/WishlistButton";
 import CustomizeProducts from "@/components/CustomizeProducts";
 import ProductImages from "@/components/ProductImages";
 import { wixClientServer } from "@/lib/wixClientServer";
+import { auth } from "@/auth";
 
 // Dynamic rendering required since wix client reads cookies for auth tokens
 export const dynamic = "force-dynamic";
@@ -15,6 +16,7 @@ type PageProps = {
 
 export default async function SingleItemPage({ params }: PageProps) {
   const wixClient = await wixClientServer();
+  const session = await auth();
   const slug = (await params).slug;
   const products = await wixClient.products
     .queryProducts()
@@ -52,7 +54,7 @@ export default async function SingleItemPage({ params }: PageProps) {
         )}
 
         <div className="flex items-center gap-4">
-          {product?._id && <WishlistButton productId={product._id} slug={product.slug || ""} initialIsInWishlist={await checkIsInWishlist(product._id)} />}
+          {product?._id && <WishlistButton productId={product._id} slug={product.slug || ""} userId={session?.user?.id} initialIsInWishlist={await checkIsInWishlist(product._id)} />}
         </div>
 
         <div className="h-[2px] bg-gray-100" />

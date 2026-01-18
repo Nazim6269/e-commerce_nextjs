@@ -9,10 +9,12 @@ import toast from "react-hot-toast";
 const WishlistButton = ({
     productId,
     slug,
+    userId,
     initialIsInWishlist = false,
 }: {
     productId: string;
     slug: string;
+    userId?: string;
     initialIsInWishlist?: boolean;
 }) => {
     const [isInWishlist, setIsInWishlist] = useState(initialIsInWishlist);
@@ -21,6 +23,12 @@ const WishlistButton = ({
 
     const handleToggle = async (e: React.MouseEvent) => {
         e.preventDefault();
+
+        if (!userId) {
+            const currentPath = window.location.pathname;
+            router.push(`/signin?callbackUrl=${currentPath}`);
+            return;
+        }
 
         const previousState = isInWishlist;
         setIsInWishlist(!previousState);

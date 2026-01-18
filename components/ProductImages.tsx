@@ -11,7 +11,7 @@ const ProductImages = ({ items }: { items: any }) => {
       <div className="h-[500px] relative">
         <Image
           src={items?.[index]?.image?.url}
-          alt={items?.[index]?.name}
+          alt={items?.[index]?.name || 'test'}
           fill
           sizes="50vw"
           className="object-cover rounded-md"
@@ -21,11 +21,12 @@ const ProductImages = ({ items }: { items: any }) => {
         {items?.map((item: any, i: number) => (
           <div
             className="w-1/4 h-32 relative gap-4 mt-8 cursor-pointer"
-            key={item.id}
+            key={item._id}
           >
+
             <Image
               src={item?.image?.url}
-              alt={item?.name}
+              alt={item?.name || 'test'}
               fill
               sizes="30vw"
               className="object-cover rounded-md"

@@ -3,6 +3,7 @@
 import { auth } from "@/auth";
 import client from "@/lib/db";
 import { WishlistModel } from "@/models/wishlistModel";
+import { userModel } from "@/models/userModel";
 import mongoose from "mongoose";
 import { revalidatePath } from "next/cache";
 
@@ -50,10 +51,10 @@ export const addToWishlist = async (productId: string, slug: string) => {
         // Small optimization: If session keys are standard, use session.user.id
         // If not, lookup. Let's do a lookup to be 100% sure we have the MongoDB _id
 
-        const user = await mongoose.models.User.findOne({ email: session.user.email });
+        const user = await userModel.findOne({ email: session.user.email });
         if (!user) return { success: false, message: "User not found" };
 
-        const userId = user._id.toString();
+        const userId = user.id;
 
         // Check if already exists
         const existing = await WishlistModel.findOne({ userId, productId });
@@ -84,10 +85,10 @@ export const removeFromWishlist = async (productId: string) => {
         if (!session?.user?.email) return { success: false, message: "Unauthorized" };
 
         await connectDB();
-        const user = await mongoose.models.User.findOne({ email: session.user.email });
+        const user = await userModel.findOne({ email: session.user.email });
         if (!user) return { success: false, message: "User not found" };
 
-        await WishlistModel.findOneAndDelete({ userId: user._id, productId });
+        await WishlistModel.findOneAndDelete({ userId: user.id, productId });
 
         revalidatePath("/wishlist");
         // We might not know the slug here easily to revalidate the product page, 
@@ -106,10 +107,10 @@ export const getWishlist = async () => {
         if (!session?.user?.email) return [];
 
         await connectDB();
-        const user = await mongoose.models.User.findOne({ email: session.user.email });
+        const user = await userModel.findOne({ email: session.user.email });
         if (!user) return [];
 
-        const items = await WishlistModel.find({ userId: user._id }).sort({ createdAt: -1 });
+        const items = await WishlistModel.find({ userId: user.id }).sort({ createdAt: -1 });
         // Return plain objects
         return items.map((item: any) => ({
             productId: item.productId,
@@ -130,10 +131,10 @@ export const checkIsInWishlist = async (productId: string) => {
         if (!session?.user?.email) return false;
 
         await connectDB();
-        const user = await mongoose.models.User.findOne({ email: session.user.email });
+        const user = await userModel.findOne({ email: session.user.email });
         if (!user) return false;
 
-        const exists = await WishlistModel.exists({ userId: user._id, productId });
+        const exists = await WishlistModel.exists({ userId: user.id, productId });
         return !!exists;
     } catch (err) {
         return false;
