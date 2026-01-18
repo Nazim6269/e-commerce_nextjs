@@ -40,9 +40,6 @@ const ListPage = async ({ searchParams }: { searchParams: Promise<any> }) => {
             Grab up to 50% off on
             <br /> Selected Products
           </h1>
-          <button className="rounded-3xl bg-nazim text-white w-max py-3 px-5 text-sm">
-            Buy Now
-          </button>
         </div>
         <div className="relative w-1/3">
           <Image src="/woman.png" alt="" fill className="object-contain" />
