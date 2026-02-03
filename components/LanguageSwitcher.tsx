@@ -2,12 +2,13 @@
 
 import { Languages } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const LanguageSwitcher = () => {
   const router = useRouter();
   const [locale, setLocale] = useState("en");
   const [open, setOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const cookieLocale = document.cookie
@@ -15,6 +16,16 @@ const LanguageSwitcher = () => {
       .find((row) => row.startsWith("locale="))
       ?.split("=")[1];
     if (cookieLocale) setLocale(cookieLocale);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const switchLocale = (newLocale: string) => {
@@ -25,7 +36,7 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setOpen(!open)}
         className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center gap-1 text-sm"
