@@ -3,8 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 const CategoryList = async () => {
-  const wixClient = await wixClientServer();
-  const categories = await wixClient.collections.queryCollections().find();
+  let categories;
+  try {
+    const wixClient = await wixClientServer();
+    categories = await wixClient.collections.queryCollections().find();
+  } catch (error) {
+    console.error("Failed to fetch categories:", error);
+    return (
+      <div className="px-4 text-center text-gray-500">
+        <p>Unable to load categories. Please try again later.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="px-4 overflow-x-scroll scrollbar-hide">

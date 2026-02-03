@@ -25,14 +25,24 @@ const ProductList = async ({
   limit,
   searchParams,
 }: ProductListProps) => {
-  const wixClient = await wixClientServer();
+  let res;
+  try {
+    const wixClient = await wixClientServer();
 
-  // Base Product Query
-  const res = await wixClient.products
-    .queryProducts()
-    .eq("collectionIds", categoryId)
-    .limit(limit || 20)
-    .find();
+    // Base Product Query
+    res = await wixClient.products
+      .queryProducts()
+      .eq("collectionIds", categoryId)
+      .limit(limit || 20)
+      .find();
+  } catch (error) {
+    console.error("Failed to fetch products:", error);
+    return (
+      <div className="mt-12 text-center text-gray-500">
+        <p>Unable to load products. Please try again later.</p>
+      </div>
+    );
+  }
 
   //copy of the original items
   let productsToFilter: products.Product[] = res.items || [];

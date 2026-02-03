@@ -13,13 +13,17 @@ export const wixClientServer = async () => {
     console.log(error);
   }
 
+  if (!wixClientId) {
+    console.error("NEXT_PUBLIC_WIX_CLIENT_ID is not defined");
+  }
+
   const wixClient = createClient({
     modules: {
       products,
       collections,
     },
     auth: OAuthStrategy({
-      clientId: wixClientId!,
+      clientId: wixClientId || "",
       tokens: {
         refreshToken,
         accessToken: { value: "", expiresAt: 0 },
