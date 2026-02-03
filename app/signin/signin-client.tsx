@@ -132,16 +132,16 @@ export default function SignInClient() {
         }}
       />
 
-      <section className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-        <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
-          <h2 className="mb-6 text-center text-3xl font-bold text-gray-800">
+      <section className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-950 px-4">
+        <div className="w-full max-w-md rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-lg">
+          <h2 className="mb-6 text-center text-3xl font-bold text-gray-800 dark:text-gray-100">
             Log in with your account
           </h2>
 
           <div className="space-y-4">
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Email Address
               </label>
               <input
@@ -149,7 +149,7 @@ export default function SignInClient() {
                 {...register("email")}
                 className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.email
                   ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                  : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
+                  : "border-gray-300 dark:border-gray-600 focus:border-pink-500 focus:ring-pink-100 dark:bg-gray-800 dark:text-white"
                   }`}
                 placeholder="you@example.com"
                 disabled={isPending}
@@ -174,7 +174,7 @@ export default function SignInClient() {
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Password
               </label>
               <input
@@ -182,7 +182,7 @@ export default function SignInClient() {
                 {...register("password")}
                 className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.password
                   ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                  : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
+                  : "border-gray-300 dark:border-gray-600 focus:border-pink-500 focus:ring-pink-100 dark:bg-gray-800 dark:text-white"
                   }`}
                 placeholder="Enter a strong password"
                 disabled={isPending}
@@ -258,7 +258,7 @@ export default function SignInClient() {
             </button>
           </div>
 
-          <p className="mt-6 text-center text-sm text-gray-600">
+          <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
             Don&apos;t have an account?{" "}
             <Link
               href="/signup"

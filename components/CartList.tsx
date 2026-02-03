@@ -25,7 +25,7 @@ const CartList = ({ items }: { items: any }) => {
   }, []);
 
   if (filteredProducts.length === 0)
-    return <div>No cart items. Please add products.</div>;
+    return <div className="text-gray-500 dark:text-gray-400">No cart items. Please add products.</div>;
 
   return (
     <div>

@@ -83,7 +83,7 @@ const Reviews = ({ productId, slug, reviews: initialReviews }: { productId: stri
             <h2 className="text-2xl font-semibold">Customer Reviews</h2>
 
             {/* Write a Review */}
-            <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
+            <div className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl border border-gray-100 dark:border-gray-800">
                 <h3 className="text-lg font-medium mb-4">Write a review</h3>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     {/* Stars */}
@@ -99,7 +99,7 @@ const Reviews = ({ productId, slug, reviews: initialReviews }: { productId: stri
                             >
                                 <Star
                                     size={24}
-                                    className={`${star <= (hover || rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                                    className={`${star <= (hover || rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300 dark:text-gray-600"
                                         } transition-colors`}
                                 />
                             </button>
@@ -114,13 +114,13 @@ const Reviews = ({ productId, slug, reviews: initialReviews }: { productId: stri
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                         placeholder="Share your thoughts about this product..."
-                        className="w-full p-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 min-h-[100px] bg-white"
+                        className="w-full p-3 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary/20 min-h-[100px] bg-white dark:bg-gray-800 dark:text-white"
                         required
                     />
 
                     {/* Image Upload */}
                     <div className="flex flex-col gap-2">
-                        <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                        <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
                             <Upload size={18} />
                             <span>Add Images</span>
                             <input
@@ -135,7 +135,7 @@ const Reviews = ({ productId, slug, reviews: initialReviews }: { productId: stri
                         {selectedImages.length > 0 && (
                             <div className="flex flex-wrap gap-2 mt-2">
                                 {selectedImages.map((img, index) => (
-                                    <div key={index} className="relative w-20 h-20 rounded-md overflow-hidden border border-gray-200">
+                                    <div key={index} className="relative w-20 h-20 rounded-md overflow-hidden border border-gray-200 dark:border-gray-700">
                                         <Image src={img} alt="review" fill className="object-cover" />
                                         <button
                                             type="button"
@@ -164,12 +164,12 @@ const Reviews = ({ productId, slug, reviews: initialReviews }: { productId: stri
             {/* Review List */}
             <div className="flex flex-col gap-6">
                 {reviews.length === 0 ? (
-                    <p className="text-gray-500 italic">No reviews yet. Be the first to review!</p>
+                    <p className="text-gray-500 dark:text-gray-400 italic">No reviews yet. Be the first to review!</p>
                 ) : (
                     reviews.map((review) => (
-                        <div key={review._id} className="border-b border-gray-100 pb-6 last:border-0">
+                        <div key={review._id} className="border-b border-gray-100 dark:border-gray-800 pb-6 last:border-0">
                             <div className="flex items-center gap-3 mb-2">
-                                <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-200">
+                                <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
                                     {review.userImage ? (
                                         <Image src={review.userImage} alt={review.userName} fill className="object-cover" />
                                     ) : (
@@ -191,19 +191,19 @@ const Reviews = ({ productId, slug, reviews: initialReviews }: { productId: stri
                                     <Star
                                         key={star}
                                         size={16}
-                                        className={`${star <= review.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
+                                        className={`${star <= review.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300 dark:text-gray-600"}`}
                                     />
                                 ))}
                             </div>
 
-                            <p className="text-gray-600 text-sm leading-relaxed mb-4">{review.text}</p>
+                            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">{review.text}</p>
 
                             {review.images && review.images.length > 0 && (
                                 <div className="flex flex-wrap gap-2">
                                     {review.images.map((img, index) => (
                                         <div
                                             key={index}
-                                            className="relative w-24 h-24 rounded-lg overflow-hidden border border-gray-100 cursor-pointer hover:opacity-90 transition-opacity"
+                                            className="relative w-24 h-24 rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700 cursor-pointer hover:opacity-90 transition-opacity"
                                         >
                                             <Image src={img} alt="Review image" fill className="object-cover" />
                                         </div>

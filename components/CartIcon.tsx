@@ -37,7 +37,7 @@ const CartIcon = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
     <>
       <div className="relative cursor-pointer group flex items-center">
         <div className="relative w-5 h-5 md:w-6 md:h-6">
-          <Image src="/cart.png" alt="" fill className="object-contain" />
+          <Image src="/cart.png" alt="" fill className="object-contain dark:invert" />
         </div>
         {itemCount > 0 && (
           <div className="absolute -top-2 -right-2 md:-top-2.5 md:-right-2.5 w-4 h-4 md:w-5 md:h-5 bg-nazim rounded-full text-white text-[10px] md:text-xs flex items-center justify-center font-medium">

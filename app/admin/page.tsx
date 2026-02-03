@@ -15,7 +15,7 @@ export default function AdminPage() {
 
             <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-7">
                 <AdminChart />
-                <Suspense fallback={<div className="col-span-3 h-[300px] bg-gray-100 animate-pulse rounded-lg" />}>
+                <Suspense fallback={<div className="col-span-3 h-[300px] bg-gray-100 dark:bg-gray-800 animate-pulse rounded-lg" />}>
                     <TopProducts />
                 </Suspense>
             </div>

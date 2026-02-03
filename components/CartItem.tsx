@@ -29,7 +29,7 @@ const CartItem: React.FC<CartItemProps> = ({
   const decreaseQty = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   return (
-    <div className="flex items-center gap-6 w-full py-3 border-b border-gray-200 hover:bg-gray-50 transition px-2">
+    <div className="flex items-center gap-6 w-full py-3 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition px-2">
       {/* IMAGE */}
       <Link href={"/cart"}>
         <div className="w-16 h-16 flex-shrink-0">
@@ -44,7 +44,7 @@ const CartItem: React.FC<CartItemProps> = ({
       </Link>
 
       {/* PRODUCT NAME */}
-      <div className="flex-1 font-medium text-gray-800">{name}</div>
+      <div className="flex-1 font-medium text-gray-800 dark:text-gray-100">{name}</div>
 
       {/* AVAILABILITY */}
       <div className="w-28 text-sm text-green-500">{availability}</div>
@@ -53,21 +53,21 @@ const CartItem: React.FC<CartItemProps> = ({
       <div className="flex items-center gap-2 w-28">
         <button
           onClick={decreaseQty}
-          className="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 transition"
+          className="px-2 py-1 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
         >
           -
         </button>
         <span className="w-6 text-center">{quantity}</span>
         <button
           onClick={increaseQty}
-          className="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 transition"
+          className="px-2 py-1 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
         >
           +
         </button>
       </div>
 
       {/* PRICE */}
-      <div className="w-24 text-right font-semibold text-gray-800">
+      <div className="w-24 text-right font-semibold text-gray-800 dark:text-gray-100">
         ${(price * quantity).toFixed(2)}
       </div>
 

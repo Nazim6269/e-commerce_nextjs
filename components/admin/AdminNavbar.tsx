@@ -21,7 +21,7 @@ export default function AdminNavbar() {
     const toggleMenu = () => setIsOpen(!isOpen);
 
     return (
-        <header className="md:hidden bg-white border-b p-4 flex items-center justify-between sticky top-0 z-50">
+        <header className="md:hidden bg-white dark:bg-gray-900 border-b dark:border-gray-700 p-4 flex items-center justify-between sticky top-0 z-50">
             <h1 className="text-xl font-bold text-primary">Admin</h1>
             <button onClick={toggleMenu} className="p-2">
                 <Menu className="w-6 h-6" />
@@ -30,8 +30,8 @@ export default function AdminNavbar() {
             {/* Mobile Menu Overlay */}
             {isOpen && (
                 <div className="fixed inset-0 bg-black/50 z-50 md:hidden">
-                    <div className="fixed inset-y-0 left-0 w-64 bg-white shadow-xl animate-in slide-in-from-left duration-200">
-                        <div className="p-6 border-b flex items-center justify-between">
+                    <div className="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-900 shadow-xl animate-in slide-in-from-left duration-200">
+                        <div className="p-6 border-b dark:border-gray-700 flex items-center justify-between">
                             <h1 className="text-2xl font-bold text-primary">Admin</h1>
                             <button onClick={toggleMenu}>
                                 <X className="w-6 h-6" />
@@ -48,7 +48,7 @@ export default function AdminNavbar() {
                                         onClick={() => setIsOpen(false)}
                                         className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive
                                             ? "bg-primary text-primary-foreground"
-                                            : "text-gray-600 hover:bg-gray-100"
+                                            : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                                             }`}
                                     >
                                         <Icon className="w-5 h-5" />
@@ -57,16 +57,16 @@ export default function AdminNavbar() {
                                 );
                             })}
                         </nav>
-                        <div className="absolute bottom-0 left-0 right-0 p-4 border-t space-y-2">
+                        <div className="absolute bottom-0 left-0 right-0 p-4 border-t dark:border-gray-700 space-y-2">
                             <Link
                                 href="/"
-                                className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                                className="flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                             >
                                 <Home className="w-5 h-5" />
                                 <span className="font-medium">Store Front</span>
                             </Link>
                             <button
-                                className="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                className="w-full flex items-center gap-3 px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-lg transition-colors"
                             >
                                 <LogOut className="w-5 h-5" />
                                 <span className="font-medium">Logout</span>

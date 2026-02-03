@@ -67,11 +67,11 @@ const WishlistButton = ({
         <button
             disabled={isPending}
             onClick={handleToggle}
-            className="rounded-md bg-white p-2 hover:bg-gray-100 transition-colors shadow-sm ring-1 ring-gray-200"
+            className="rounded-md bg-white dark:bg-gray-800 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-sm ring-1 ring-gray-200 dark:ring-gray-600"
             title={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
         >
             <Heart
-                className={`w-6 h-6 ${isInWishlist ? "fill-red-500 text-red-500" : "text-gray-600"
+                className={`w-6 h-6 ${isInWishlist ? "fill-red-500 text-red-500" : "text-gray-600 dark:text-gray-300"
                     }`}
             />
         </button>

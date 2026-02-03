@@ -11,7 +11,7 @@ const slides = [
     description: 'Sale! Up to 50% off!',
     img: 'https://images.pexels.com/photos/27912713/pexels-photo-27912713/free-photo-of-high-angle-view-of-a-cappuccino-and-coffee-beans.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     url: '/',
-    bg: 'bg-gradient-to-r from-yellow-50 to-pink-50',
+    bg: 'bg-gradient-to-r from-yellow-50 to-pink-50 dark:from-yellow-950/30 dark:to-pink-950/30',
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const slides = [
     description: 'Sale! Up to 50% off!',
     img: 'https://images.pexels.com/photos/20218545/pexels-photo-20218545/free-photo-of-pancakes-on-a-plate.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     url: '/',
-    bg: 'bg-gradient-to-r from-pink-50 to-blue-50',
+    bg: 'bg-gradient-to-r from-pink-50 to-blue-50 dark:from-pink-950/30 dark:to-blue-950/30',
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const slides = [
     description: 'Sale! Up to 50% off!',
     img: 'https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800',
     url: '/',
-    bg: 'bg-gradient-to-r from-blue-50 to-yellow-50',
+    bg: 'bg-gradient-to-r from-blue-50 to-yellow-50 dark:from-blue-950/30 dark:to-yellow-950/30',
   },
 ];
 

@@ -40,10 +40,10 @@ export default async function ProductsPage() {
             </div>
 
             {lowStockCount > 0 && (
-                <div className="bg-red-50 border-l-4 border-red-500 p-4 flex items-center gap-3">
+                <div className="bg-red-50 dark:bg-red-950/30 border-l-4 border-red-500 p-4 flex items-center gap-3">
                     <AlertCircle className="h-5 w-5 text-red-500" />
                     <div>
-                        <p className="text-sm text-red-700 font-medium">
+                        <p className="text-sm text-red-700 dark:text-red-400 font-medium">
                             Inventory Alert: {lowStockCount} items are low on stock (less than 10 units remaining).
                         </p>
                     </div>
@@ -82,7 +82,7 @@ export default async function ProductsPage() {
                                         </Badge>
                                     </TableCell>
                                     <TableCell>{product.price?.formatted?.price}</TableCell>
-                                    <TableCell className={product.stock?.quantity < 10 ? "text-red-600 font-bold" : ""}>
+                                    <TableCell className={product.stock?.quantity < 10 ? "text-red-600 dark:text-red-400 font-bold" : ""}>
                                         {product.stock?.quantity ?? 'N/A'}
                                         {product.stock?.quantity < 10 && <span className="ml-2 text-[10px] uppercase">Low Stock</span>}
                                     </TableCell>

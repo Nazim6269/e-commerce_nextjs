@@ -15,7 +15,7 @@ const WishlistPage = async () => {
         return (
             <div className="mt-24 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex flex-col items-center justify-center gap-6">
                 <h1 className="text-2xl font-semibold">Your Wishlist</h1>
-                <p className="text-gray-500">Your wishlist is empty.</p>
+                <p className="text-gray-500 dark:text-gray-400">Your wishlist is empty.</p>
                 <Link href="/" className="bg-nazim text-white px-4 py-2 rounded-md ring-1 ring-nazim hover:bg-white hover:text-nazim transition-colors">
                     Continue Shopping
                 </Link>
@@ -65,7 +65,7 @@ const WishlistPage = async () => {
                         <div className="flex justify-between items-start">
                             <div className="flex flex-col gap-1">
                                 <span className="font-medium">{product.name}</span>
-                                <span className="font-semibold text-sm text-gray-700">
+                                <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">
                                     ${product.priceData?.price?.toFixed(2)}
                                 </span>
                             </div>
@@ -78,7 +78,7 @@ const WishlistPage = async () => {
 
                         {product.additionalInfoSections && (
                             <div
-                                className="text-sm text-gray-500 line-clamp-2"
+                                className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2"
                                 dangerouslySetInnerHTML={{
                                     __html: DOMPurify.sanitize(
                                         product.additionalInfoSections.find(

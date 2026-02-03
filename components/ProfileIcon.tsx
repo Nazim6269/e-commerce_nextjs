@@ -20,7 +20,7 @@ const ProfileIcon = () => {
           src="/profile.png"
           alt=""
           fill
-          className="object-contain"
+          className="object-contain dark:invert"
           onClick={() => setIsProfileOpen((prev) => !prev)}
         />
       </div>

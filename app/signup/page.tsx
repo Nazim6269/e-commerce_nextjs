@@ -163,16 +163,16 @@ const SignUpPage: React.FC<{}> = () => {
         }}
       />
 
-      <section className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-        <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
-          <h2 className="mb-6 text-center text-3xl font-bold text-gray-800">
+      <section className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-950 px-4">
+        <div className="w-full max-w-md rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-lg">
+          <h2 className="mb-6 text-center text-3xl font-bold text-gray-800 dark:text-gray-100">
             Create an Account
           </h2>
 
           <div className="space-y-4">
             {/* Name */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Full Name
               </label>
               <input
@@ -180,7 +180,7 @@ const SignUpPage: React.FC<{}> = () => {
                 {...register("name")}
                 className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.name
                     ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                    : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
+                    : "border-gray-300 dark:border-gray-600 focus:border-pink-500 focus:ring-pink-100 dark:bg-gray-800 dark:text-white"
                   }`}
                 placeholder="Enter your name"
                 disabled={isPending}
@@ -205,7 +205,7 @@ const SignUpPage: React.FC<{}> = () => {
 
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Email Address
               </label>
               <input
@@ -213,7 +213,7 @@ const SignUpPage: React.FC<{}> = () => {
                 {...register("email")}
                 className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.email
                     ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                    : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
+                    : "border-gray-300 dark:border-gray-600 focus:border-pink-500 focus:ring-pink-100 dark:bg-gray-800 dark:text-white"
                   }`}
                 placeholder="you@example.com"
                 disabled={isPending}
@@ -238,7 +238,7 @@ const SignUpPage: React.FC<{}> = () => {
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Password
               </label>
               <input
@@ -246,7 +246,7 @@ const SignUpPage: React.FC<{}> = () => {
                 {...register("password")}
                 className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.password
                     ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                    : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
+                    : "border-gray-300 dark:border-gray-600 focus:border-pink-500 focus:ring-pink-100 dark:bg-gray-800 dark:text-white"
                   }`}
                 placeholder="Enter a strong password"
                 disabled={isPending}
@@ -325,7 +325,7 @@ const SignUpPage: React.FC<{}> = () => {
 
             {/* Confirm Password */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Confirm Password
               </label>
               <input
@@ -333,7 +333,7 @@ const SignUpPage: React.FC<{}> = () => {
                 {...register("confirmPassword")}
                 className={`mt-1 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring transition-all ${errors.confirmPassword
                     ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                    : "border-gray-300 focus:border-pink-500 focus:ring-pink-100"
+                    : "border-gray-300 dark:border-gray-600 focus:border-pink-500 focus:ring-pink-100 dark:bg-gray-800 dark:text-white"
                   }`}
                 placeholder="Re-enter password"
                 disabled={isPending}
@@ -414,7 +414,7 @@ const SignUpPage: React.FC<{}> = () => {
             </button>
           </div>
 
-          <p className="mt-6 text-center text-sm text-gray-600">
+          <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
             Already have an account?{" "}
             <Link
               href="/signin"

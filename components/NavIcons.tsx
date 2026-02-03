@@ -11,7 +11,7 @@ const NavIcons = async () => {
   const cartHref = user?.user ? "/cart" : "/signin?callbackUrl=/cart";
   return (
     <div className="flex items-center gap-4 xl:gap-6 relative">
-      {user?.user ? <ProfileIcon /> : <Link href={"/signin"}>Login</Link>}
+      {user?.user ? <ProfileIcon /> : <Link href={"/signin"} className="hover:text-nazim transition-colors">Login</Link>}
       {user?.user && <NotificationIcon />}
       <Link href={"/wishlist"}>
         {user?.user && <WhishListIcon />}

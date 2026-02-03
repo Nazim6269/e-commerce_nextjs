@@ -16,7 +16,7 @@ const SocialLogin = ({ callbackUrl }: { callbackUrl?: string }) => {
         type="button"
         onClick={() => handleClick("google")}
         disabled={loading}
-        className="w-full rounded-lg border border-1 mt-2  py-2 font-semibold text-gray-500 transition-all disabled:opacity-60"
+        className="w-full rounded-lg border border-1 dark:border-gray-600 mt-2  py-2 font-semibold text-gray-500 dark:text-gray-300 transition-all disabled:opacity-60"
       >
         {loading ? "Creating Account..." : "Login with Google"}
       </button>
@@ -24,7 +24,7 @@ const SocialLogin = ({ callbackUrl }: { callbackUrl?: string }) => {
         type="button"
         onClick={() => handleClick("github")}
         disabled={loading}
-        className="w-full rounded-lg border border-1 mt-2  py-2 font-semibold text-gray-500 transition-all disabled:opacity-60"
+        className="w-full rounded-lg border border-1 dark:border-gray-600 mt-2  py-2 font-semibold text-gray-500 dark:text-gray-300 transition-all disabled:opacity-60"
       >
         {loading ? "Creating Account..." : "Login with Github"}
       </button>

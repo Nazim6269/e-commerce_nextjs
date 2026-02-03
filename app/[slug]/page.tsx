@@ -45,13 +45,13 @@ export default async function SingleItemPage({ params }: PageProps) {
         {/* Texts */}
         <div className="w-full lg:w-1/2 flex flex-col gap-6">
           <h1 className="text-4xl font-medium">{product?.name}</h1>
-          <p className="text-gray-500">{product?.description}</p>
-          <div className="h-[2px] bg-gray-100" />
+          <p className="text-gray-500 dark:text-gray-400">{product?.description}</p>
+          <div className="h-[2px] bg-gray-100 dark:bg-gray-800" />
           {product?.priceData?.price === product?.priceData?.discountedPrice ? (
             <h2 className="font-medium text-2xl">${product?.priceData?.price}</h2>
           ) : (
             <div className="flex items-center gap-4">
-              <h3 className="text-xl text-gray-500 line-through">
+              <h3 className="text-xl text-gray-500 dark:text-gray-400 line-through">
                 ${product?.priceData?.price}
               </h3>
               <h2 className="font-medium text-2xl">
@@ -71,7 +71,7 @@ export default async function SingleItemPage({ params }: PageProps) {
             )}
           </div>
 
-          <div className="h-[2px] bg-gray-100" />
+          <div className="h-[2px] bg-gray-100 dark:bg-gray-800" />
           {product?._id && product?.variants && product?.productOptions ? (
             <CustomizeProducts
               productId={product?._id}
@@ -86,12 +86,12 @@ export default async function SingleItemPage({ params }: PageProps) {
             />
           )}
 
-          <div className="h-[2px] bg-gray-100" />
+          <div className="h-[2px] bg-gray-100 dark:bg-gray-800" />
 
           {product?.additionalInfoSections?.map((section: any) => (
             <div className="text-sm" key={section?.title}>
               <h4 className="font-medium mb-4">{section?.title}</h4>
-              <p className="text-gray-500">{section?.description}</p>
+              <p className="text-gray-500 dark:text-gray-400">{section?.description}</p>
             </div>
           ))}
         </div>

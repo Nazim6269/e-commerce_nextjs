@@ -160,10 +160,10 @@ const CheckoutSection = ({ items }: { items: products.Product[] }) => {
     <div className="mt-4 space-y-6">
       {/* Guest checkout info */}
       <div className="space-y-2">
-        <h4 className="text-lg font-semibold text-gray-900">
+        <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
           Guest checkout details
         </h4>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           You can place an order without creating an account. We&apos;ll send
           the order confirmation to your email.
         </p>
@@ -173,28 +173,28 @@ const CheckoutSection = ({ items }: { items: products.Product[] }) => {
             placeholder="Full name"
             value={guestName}
             onChange={(e) => setGuestName(e.target.value)}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-nazim"
+            className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 dark:text-white px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-nazim"
           />
           <input
             type="email"
             placeholder="Email for receipt"
             value={guestEmail}
             onChange={(e) => setGuestEmail(e.target.value)}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-nazim"
+            className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 dark:text-white px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-nazim"
           />
         </div>
       </div>
 
       {/* Shipping options */}
       <div className="space-y-2">
-        <h4 className="text-lg font-semibold text-gray-900">
+        <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
           Shipping options
         </h4>
         <div className="space-y-2">
           {shippingOptions.map((opt) => (
             <label
               key={opt.id}
-              className="flex items-center justify-between rounded-md border border-gray-200 px-3 py-2 text-sm cursor-pointer"
+              className="flex items-center justify-between rounded-md border border-gray-200 dark:border-gray-700 px-3 py-2 text-sm cursor-pointer"
             >
               <div className="flex items-center gap-2">
                 <input
@@ -217,7 +217,7 @@ const CheckoutSection = ({ items }: { items: products.Product[] }) => {
 
       {/* Coupon / discounts */}
       <div className="space-y-2">
-        <h4 className="text-lg font-semibold text-gray-900">
+        <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
           Coupon / discount
         </h4>
         <div className="flex gap-2">
@@ -226,7 +226,7 @@ const CheckoutSection = ({ items }: { items: products.Product[] }) => {
             placeholder="Enter coupon code"
             value={couponInput}
             onChange={(e) => setCouponInput(e.target.value)}
-            className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-nazim"
+            className="flex-1 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 dark:text-white px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-nazim"
           />
           <button
             type="button"
@@ -267,11 +267,11 @@ const CheckoutSection = ({ items }: { items: products.Product[] }) => {
           type="checkbox"
           checked={agree}
           onChange={(e) => setAgree(e.target.checked)}
-          className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500"
+          className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-primary-600 focus:ring-2 focus:ring-primary-500"
         />
         <label
           htmlFor="terms-checkbox-2"
-          className="ms-2 text-sm font-medium text-gray-900"
+          className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-100"
         >
           I agree with the{" "}
           <Link
@@ -286,7 +286,7 @@ const CheckoutSection = ({ items }: { items: products.Product[] }) => {
       <div className="gap-4 sm:flex sm:items-center">
         <Link
           href={"/"}
-          className="w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100"
+          className="w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-5 py-2.5 text-sm font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700"
         >
           Return to Shopping
         </Link>
