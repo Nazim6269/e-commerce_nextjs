@@ -54,7 +54,13 @@ export const {
               user.password
             );
             if (isMatch) {
-              return user;
+              return {
+                id: (user._id as any).toString(),
+                name: user.name,
+                email: user.email,
+                image: user.image,
+                role: user.role,
+              };
             } else {
               return null;
             }
@@ -92,8 +98,10 @@ export const {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as any).role || "user";
         token.id = (user as any)._id?.toString() || (user as any).id;
+        // Fetch role from DB directly — the adapter strips custom fields
+        const dbUser = await findUserFromDB(token.email!);
+        token.role = dbUser?.role || "user";
       }
       return token;
     },
