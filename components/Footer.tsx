@@ -4,7 +4,7 @@ import { Github, Linkedin, Globe } from "lucide-react";
 
 const Footer = () => {
   return (
-    <div className="py-24 px-4 md:px-8 lg:px-16 xl:32 2xl:px-64 bg-gray-100 text-sm mt-24">
+    <div className="py-24 px-4 md:px-8 lg:px-16 xl:32 2xl:px-64 bg-gray-100 dark:bg-gray-900 text-sm mt-24">
       {/* TOP */}
       <div className="flex flex-col md:flex-row justify-between gap-24">
         {/* LEFT */}
@@ -12,7 +12,7 @@ const Footer = () => {
           <Link href="/">
             <div className="text-2xl tracking-wide">Buyly</div>
           </Link>
-          <p>
+          <p className="text-gray-600 dark:text-gray-400">
             North Badda, Tatul Tola Road, Dhaka - 1212, Bangladesh
           </p>
           <span className="font-semibold">nazimdev100220001@gmail.com</span>
@@ -65,7 +65,7 @@ const Footer = () => {
         {/* RIGHT */}
         <div className="w-full md:w-1/2 lg:w-1/4 flex flex-col gap-8">
           <h1 className="font-medium text-lg">SUBSCRIBE</h1>
-          <p>
+          <p className="text-gray-600 dark:text-gray-400">
             Be the first to get the latest news about trends, promotions, and
             much more!
           </p>
@@ -73,7 +73,7 @@ const Footer = () => {
             <input
               type="text"
               placeholder="Email address"
-              className="p-4 w-3/4"
+              className="p-4 w-3/4 bg-white dark:bg-gray-800 dark:text-white"
             />
             <button className="w-1/4 bg-nazim text-white">JOIN</button>
           </div>
@@ -92,11 +92,11 @@ const Footer = () => {
         <div className="">© {new Date().getFullYear()} All rights reserved by Nazim </div>
         <div className="flex flex-col gap-8 md:flex-row">
           <div className="">
-            <span className="text-gray-500 mr-4">Language</span>
+            <span className="text-gray-500 dark:text-gray-400 mr-4">Language</span>
             <span className="font-medium">Bangladesh | Bangla</span>
           </div>
           <div className="">
-            <span className="text-gray-500 mr-4">Currency</span>
+            <span className="text-gray-500 dark:text-gray-400 mr-4">Currency</span>
             <span className="font-medium">TK</span>
           </div>
         </div>

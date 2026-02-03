@@ -4,7 +4,6 @@ import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 import Link from "next/link";
 
-// Define the structure for the query parameters
 interface SearchParams {
   sort?: string;
   min?: string;
@@ -13,7 +12,6 @@ interface SearchParams {
   name?: string;
 }
 
-// Define the component's props
 interface ProductListProps {
   categoryId: string;
   limit?: number;
@@ -29,7 +27,6 @@ const ProductList = async ({
   try {
     const wixClient = await wixClientServer();
 
-    // Base Product Query
     res = await wixClient.products
       .queryProducts()
       .eq("collectionIds", categoryId)
@@ -38,18 +35,14 @@ const ProductList = async ({
   } catch (error) {
     console.error("Failed to fetch products:", error);
     return (
-      <div className="mt-12 text-center text-gray-500">
+      <div className="mt-12 text-center text-gray-500 dark:text-gray-400">
         <p>Unable to load products. Please try again later.</p>
       </div>
     );
   }
 
-  //copy of the original items
   let productsToFilter: products.Product[] = res.items || [];
 
-  // --- Filtering Logic ---
-
-  // Handle PRICE filtering (min and max)
   const minPrice = parseFloat(searchParams?.min || "0");
   const maxPrice = parseFloat(searchParams?.max || Infinity.toString());
 
@@ -60,7 +53,6 @@ const ProductList = async ({
     });
   }
 
-  // Handle TYPE filtering (physical vs. digital)
   if (searchParams?.type) {
     productsToFilter = productsToFilter.filter((product) => {
       if (
@@ -79,7 +71,6 @@ const ProductList = async ({
     });
   }
 
-  // Handle NAME search (from search bar)
   if (searchParams?.name) {
     const term = searchParams.name.toLowerCase();
     productsToFilter = productsToFilter.filter((product) =>
@@ -87,8 +78,7 @@ const ProductList = async ({
     );
   }
 
-  // ---  Sorting Logic ---
-  let sortedProducts = [...productsToFilter]; // Always work on a new copy
+  let sortedProducts = [...productsToFilter];
 
   if (searchParams?.sort) {
     const [order, type] = searchParams.sort.split("-");
@@ -110,24 +100,22 @@ const ProductList = async ({
     }
   }
 
-  // The final list to render is the sorted list
   const finalProductList = sortedProducts;
 
   return (
     <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap">
       {finalProductList.length === 0 ? (
-        <p className="text-gray-500 text-lg w-full text-center">
+        <p className="text-gray-500 dark:text-gray-400 text-lg w-full text-center">
           No items found matching your search.
         </p>
       ) : (
         finalProductList.map((product: products.Product) => (
           <Link
             href={`/${product?.slug}`}
-            className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]"
+            className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%] group"
             key={product?._id}
           >
             <div className="relative w-full h-80">
-              {/* Main Image */}
               <Image
                 src={product.media?.mainMedia?.image?.url || "/product.png"}
                 alt={product?.name || "Product image"}
@@ -135,7 +123,6 @@ const ProductList = async ({
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 45vw, 22vw"
                 className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
               />
-              {/* Secondary/Hover Image */}
               {product.media?.items && product.media.items.length > 1 && (
                 <Image
                   src={product.media.items[1]?.image?.url || "/product.png"}
@@ -153,10 +140,9 @@ const ProductList = async ({
               </span>
             </div>
 
-            {/* Description Display */}
             {product.additionalInfoSections && (
               <div
-                className="text-sm text-gray-500 line-clamp-2" // Added line-clamp for neatness
+                className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2"
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(
                     product.additionalInfoSections.find(
@@ -167,7 +153,7 @@ const ProductList = async ({
               ></div>
             )}
 
-            <button className="rounded-2xl ring-1 ring-nazim text-nazim w-max py-2 px-4 text-xs hover:bg-nazim hover:text-white">
+            <button className="rounded-2xl ring-1 ring-nazim text-nazim w-max py-2 px-4 text-xs hover:bg-nazim hover:text-white transition-colors">
               Add to Cart
             </button>
           </Link>

@@ -56,7 +56,7 @@ const Filter = ({ categories }: FilterProps) => {
       <div className="flex gap-6 flex-wrap">
         <select
           name="type"
-          className="py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED] outline-none"
+          className="py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED] dark:bg-gray-800 dark:text-white outline-none"
           onChange={handleFilterChange}
           value={searchParams.get("type") || "Type"}
         >
@@ -68,7 +68,7 @@ const Filter = ({ categories }: FilterProps) => {
           type="number"
           name="min"
           placeholder="min price"
-          className="text-xs rounded-2xl pl-2 w-24 ring-1 ring-gray-400 outline-none"
+          className="text-xs rounded-2xl pl-2 w-24 ring-1 ring-gray-400 dark:ring-gray-600 outline-none bg-transparent dark:text-white"
           onChange={handleFilterChange}
           defaultValue={searchParams.get("min") || ""}
         />
@@ -76,14 +76,14 @@ const Filter = ({ categories }: FilterProps) => {
           type="number"
           name="max"
           placeholder="max price"
-          className="text-xs rounded-2xl pl-2 w-24 ring-1 ring-gray-400 outline-none"
+          className="text-xs rounded-2xl pl-2 w-24 ring-1 ring-gray-400 dark:ring-gray-600 outline-none bg-transparent dark:text-white"
           onChange={handleFilterChange}
           defaultValue={searchParams.get("max") || ""}
         />
 
         <select
           name="cat"
-          className="py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED] outline-none"
+          className="py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED] dark:bg-gray-800 dark:text-white outline-none"
           onChange={handleFilterChange}
           value={searchParams.get("cat") || "Category"}
         >
@@ -104,7 +104,7 @@ const Filter = ({ categories }: FilterProps) => {
       <div className="">
         <select
           name="sort"
-          className="py-2 px-4 rounded-2xl text-xs font-medium bg-white ring-1 ring-gray-400 outline-none"
+          className="py-2 px-4 rounded-2xl text-xs font-medium bg-white dark:bg-gray-800 dark:text-white ring-1 ring-gray-400 dark:ring-gray-600 outline-none"
           onChange={handleFilterChange}
           value={searchParams.get("sort") || "Sort By"}
         >
