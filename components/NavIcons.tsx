@@ -9,6 +9,7 @@ import WhishListIcon from "./WhishListIcon";
 const NavIcons = async () => {
   const user = await auth();
   const cartHref = user?.user ? "/cart" : "/signin?callbackUrl=/cart";
+  const isAdmin = (user?.user as any)?.role === "admin";
   return (
     <div className="flex items-center gap-4 xl:gap-6 relative">
       {user?.user ? <ProfileIcon /> : <Link href={"/signin"} className="hover:text-nazim transition-colors">Login</Link>}
@@ -19,7 +20,11 @@ const NavIcons = async () => {
       <Link href={cartHref}>
         {user?.user && <CartIcon isLoggedIn={!!user?.user} />}
       </Link>
-      {user?.user && <DashboardIcon />}
+      {isAdmin && (
+        <Link href="/admin">
+          <DashboardIcon />
+        </Link>
+      )}
     </div>
   );
 };
