@@ -1,10 +1,10 @@
 import { User } from "@/actions/formAction";
 import { userModel } from "@/models/userModel";
-import { connectDB } from "@/services/connectDB";
+import { connectMongoDB } from "@/lib/mongodb";
 
 //register user to database
 export const registerToDB = async (userInfo: User) => {
-  await connectDB();
+  await connectMongoDB();
   const newUser = await userModel.create(userInfo);
 
   const res = await newUser.save();
@@ -17,6 +17,7 @@ export const registerToDB = async (userInfo: User) => {
 //searching user using email
 export const findUserFromDB = async (email: string) => {
   try {
+    await connectMongoDB();
     return await userModel.findOne({ email: email });
   } catch (error) {
     throw error;

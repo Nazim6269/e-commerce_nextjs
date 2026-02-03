@@ -8,19 +8,8 @@ import mongoose from "mongoose";
 import { revalidatePath } from "next/cache";
 
 const connectDB = async () => {
-    // Rely on the cached connection from lib/db or ensure mongoose is connected
-    // Since lib/db returns a MongoClient for NextAuth, we might need a separate mongoose connection
-    // However, usually mongoose shares the connection if we use it correctly.
-    // Let's create a helper or just check readyState
-    if (mongoose.connection.readyState >= 1) return;
-
-    // We need the URI to connect mongoose if not already connected
-    // Note: In Next.js with Mongoose, it's safer to ensure connection in every action
-    // But inspecting lib/db.ts, it exports a MongoClient, not a mongoose connection.
-    // So we need to connect mongoose separately.
-    const { mongoUri } = await import("@/secret");
-    if (!mongoUri) throw new Error("Mongo URI missing");
-    await mongoose.connect(mongoUri);
+    const { connectMongoDB } = await import("@/lib/mongodb");
+    await connectMongoDB();
 };
 
 export const addToWishlist = async (productId: string, slug: string) => {

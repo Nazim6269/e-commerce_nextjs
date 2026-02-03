@@ -1,4 +1,5 @@
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import bcrypt from "bcryptjs";
 import NextAuth from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
@@ -48,11 +49,14 @@ export const {
         try {
           const user = await findUserFromDB(credentials.email);
           if (user) {
-            const isMatch = user.password === credentials.password;
+            const isMatch = await bcrypt.compare(
+              credentials.password,
+              user.password
+            );
             if (isMatch) {
               return user;
             } else {
-              return { success: false, message: "User Not found" };
+              return null;
             }
           } else {
             return null;
@@ -85,5 +89,24 @@ export const {
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = (user as any).role || "user";
+        token.id = (user as any)._id?.toString() || (user as any).id;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        (session.user as any).role = token.role as string;
+        (session.user as any).id = token.id as string;
+      }
+      return session;
+    },
+  },
+  pages: {
+    signIn: "/signin",
+  },
   secret: nextAuthSecret,
 });

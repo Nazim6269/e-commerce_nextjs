@@ -7,10 +7,8 @@ import mongoose from "mongoose";
 import { revalidatePath } from "next/cache";
 
 const connectDB = async () => {
-    if (mongoose.connection.readyState >= 1) return;
-    const { mongoUri } = await import("@/secret");
-    if (!mongoUri) throw new Error("Mongo URI missing");
-    await mongoose.connect(mongoUri);
+    const { connectMongoDB } = await import("@/lib/mongodb");
+    await connectMongoDB();
 };
 
 export const addReview = async (formData: FormData) => {
