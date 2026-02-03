@@ -12,3 +12,14 @@ export const nextAuthSecret =
 export const mongoUri = process.env.MONGODB_URI;
 export const githubId = process.env.GITHUB_ID;
 export const githubSecret = process.env.GITHUB_SECRET;
+
+// Email (Phase 3)
+export const gmailUser = process.env.GMAIL_USER;
+export const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
+
+// Stripe webhook (Phase 3)
+export const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+// Push notifications (Phase 4)
+export const vapidPublicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+export const vapidPrivateKey = process.env.VAPID_PRIVATE_KEY;
