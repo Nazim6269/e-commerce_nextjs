@@ -1,11 +1,25 @@
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminNavbar from "@/components/admin/AdminNavbar";
 
-export default function AdminLayout({
+export default async function AdminLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const session = await auth();
+
+    // Redirect to signin if not authenticated
+    if (!session) {
+        redirect("/signin?callbackUrl=/admin");
+    }
+
+    // Redirect to home if not admin
+    if ((session.user as any)?.role !== "admin") {
+        redirect("/");
+    }
+
     return (
         <div className="flex min-h-screen bg-gray-50 dark:bg-gray-950 flex-col md:flex-row">
             <AdminNavbar />

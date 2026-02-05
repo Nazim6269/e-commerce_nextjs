@@ -43,19 +43,23 @@ export const loginAction = async (
   _prevState: SignInStateProps,
   formData: FormData
 ): Promise<SignInStateProps> => {
-  const loginData = {
-    email: formData.get("email") as string,
-    password: formData.get("password") as string,
-    redirect: false,
-  };
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
 
-  const res = await signIn("credentials", loginData);
+  try {
+    await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
 
-  if (!res) {
-    return { success: false, message: "Failed to loign" };
-  } else {
     revalidatePath("/");
-    return { success: true, message: "Successfully login!!!" };
+    return { success: true, message: "Successfully logged in!" };
+  } catch (error: any) {
+    if (error.type === "CredentialsSignin") {
+      return { success: false, message: "Invalid email or password" };
+    }
+    return { success: false, message: "Failed to login. Please try again." };
   }
 };
 

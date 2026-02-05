@@ -4,14 +4,16 @@ import { connectMongoDB } from "@/lib/mongodb";
 
 //register user to database
 export const registerToDB = async (userInfo: User) => {
-  await connectMongoDB();
-  const newUser = await userModel.create(userInfo);
-
-  const res = await newUser.save();
-  if (!res) {
-    return { success: false, message: "Failed to Create account" };
+  try {
+    await connectMongoDB();
+    await userModel.create(userInfo);
+    return { success: true, message: "Successfully created account" };
+  } catch (error: any) {
+    if (error.code === 11000) {
+      return { success: false, message: "Email already exists" };
+    }
+    return { success: false, message: "Failed to create account" };
   }
-  return { success: true, message: "Successfully  Created account" };
 };
 
 //searching user using email
